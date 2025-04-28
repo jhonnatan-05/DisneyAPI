@@ -7,7 +7,7 @@ function Menu() {
       <Link to="/">Inicio</Link>
       <Link to="/personajes">Personajes</Link>
       <Link to="/peliculas">Películas</Link>
-      <Link to="/cortometrajes">Cortometrajes</Link> {/* Enlace a Cortometrajes */}
+      <Link to="/cortometrajes">Cortometrajes</Link> {}
       <Link to="/favoritos">Favoritos</Link>
     </nav>
   );

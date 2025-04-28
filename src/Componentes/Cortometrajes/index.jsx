@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Cortometrajes = () => {
   const [shortFilms, setShortFilms] = useState([]);
   const [filteredShortFilms, setFilteredShortFilms] = useState([]);
-  const [selectedShort, setSelectedShort] = useState(null); // 💥 Nuevo estado para el seleccionado
+  const [selectedShort, setSelectedShort] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState(null);
 
@@ -77,7 +77,6 @@ const Cortometrajes = () => {
         </ul>
       )}
 
-      {/* Mostrar información seleccionada */}
       {selectedShort && (
         <div style={{ marginTop: '20px', padding: '10px', border: '1px solid gray', borderRadius: '8px' }}>
           <h3>Información del cortometraje</h3>

@@ -38,7 +38,7 @@ const Peliculas = () => {
     "Frozen II"
   ];
 
-  // Filtrar películas según la búsqueda
+
   const peliculasFiltradas = peliculasDeseadas.filter(pelicula =>
     pelicula.toLowerCase().includes(busqueda.toLowerCase())
   );

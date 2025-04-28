@@ -13,7 +13,7 @@ function Personajes() {
 
   const esFavorito = (nombre) => favoritos.some(p => p.name === nombre);
 
-  // Función para obtener todos los personajes de una película
+
   const obtenerPersonajes = async () => {
     try {
       const res = await fetch(`https://api.disneyapi.dev/character?films=${encodeURIComponent('The Little Mermaid')}`);
@@ -49,7 +49,6 @@ function Personajes() {
     navigate('/favoritos');
   };
 
-  // Filtrar personajes según la búsqueda
   const personajesFiltrados = personajes.filter(personaje =>
     personaje.name.toLowerCase().includes(busqueda.toLowerCase())
   );

@@ -48,7 +48,7 @@ function Listas() {
 
   return (
     <>
-      {/* Código del componente Listas */}
+      {}
     </>
   );
 }
