@@ -1,0 +1,49 @@
+/* Fondo general */
+.personajes-lista {
+    background-color: #1e1e1e;
+    min-height: 100vh;
+    padding: 20px;
+    text-align: center;
+    color: white;
+  }
+  
+  /* Título */
+  .personajes-lista h2 {
+    margin-bottom: 20px;
+  }
+  
+  /* Barra de búsqueda */
+  .personajes-lista input[type="text"] {
+    width: 250px;
+    padding: 8px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background-color: #2c2c2c;
+    color: white;
+  }
+  
+  /* Lista de personajes */
+  .personajes-lista ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  /* Cada personaje */
+  .personajes-lista li {
+    background-color: #2c2c2c;
+    border: 1px solid #444;
+    border-radius: 12px;
+    padding: 15px;
+    width: 200px;
+    height: 300px; /* altura fija */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* para que nombre y botón siempre estén en su lugar */
+    box-shadow: 0 2px 8
+  

@@ -1,40 +1,39 @@
-// Personajes.js
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './style.css';
 
 function Personajes() {
-  const { name } = useParams();
   const [personajes, setPersonajes] = useState([]);
   const [favoritos, setFavoritos] = useState(() => {
     const storedFavorites = localStorage.getItem('favoritos');
     return storedFavorites ? JSON.parse(storedFavorites) : [];
   });
+  const [busqueda, setBusqueda] = useState('');
   const navigate = useNavigate();
 
   const esFavorito = (nombre) => favoritos.some(p => p.name === nombre);
 
-  useEffect(() => {
-    const obtenerPersonajes = async () => {
-      try {
-        const res = await fetch(`https://api.disneyapi.dev/character?films=${encodeURIComponent('The Little Mermaid')}`);
-        const resultado = await res.json();
-        
-        if (resultado.data?.length > 0) {
-          // Almacenar tanto nombres como imágenes
-          const personajesConImagenes = resultado.data.map(personaje => ({
-            name: personaje.name,
-            image: personaje.imageUrl // Asegúrate de que este campo es correcto
-          }));
-          setPersonajes(personajesConImagenes);
-        } else {
-          setPersonajes([]);
-        }
-      } catch (error) {
-        console.error("Error al cargar personajes:", error);
+  // Función para obtener todos los personajes de una película
+  const obtenerPersonajes = async () => {
+    try {
+      const res = await fetch(`https://api.disneyapi.dev/character?films=${encodeURIComponent('The Little Mermaid')}`);
+      const resultado = await res.json();
+      
+      if (resultado.data?.length > 0) {
+        const personajesConImagenes = resultado.data.map(personaje => ({
+          name: personaje.name,
+          image: personaje.imageUrl
+        }));
+        setPersonajes(personajesConImagenes);
+      } else {
+        setPersonajes([]);
       }
-    };
+    } catch (error) {
+      console.error("Error al cargar personajes:", error);
+    }
+  };
 
+  useEffect(() => {
     obtenerPersonajes();
   }, []);
 
@@ -47,17 +46,28 @@ function Personajes() {
     }
     setFavoritos(nuevosFavoritos);
     localStorage.setItem('favoritos', JSON.stringify(nuevosFavoritos));
-    navigate('/favoritos'); // Navegar a la página de Favoritos
+    navigate('/favoritos');
   };
+
+  // Filtrar personajes según la búsqueda
+  const personajesFiltrados = personajes.filter(personaje =>
+    personaje.name.toLowerCase().includes(busqueda.toLowerCase())
+  );
 
   return (
     <div className="personajes-lista">
       <h2>Personajes de La Sirenita</h2>
-      {personajes.length === 0 ? (
+      <input 
+        type="text" 
+        placeholder="Buscar personaje..." 
+        value={busqueda} 
+        onChange={(e) => setBusqueda(e.target.value)} 
+      />
+      {personajesFiltrados.length === 0 ? (
         <p>No se encontraron personajes.</p>
       ) : (
         <ul>
-          {personajes.map((personaje, index) => (
+          {personajesFiltrados.map((personaje, index) => (
             <li key={index}>
               <img src={personaje.image} alt={personaje.name} style={{ width: '100px', height: 'auto' }} />
               {personaje.name}

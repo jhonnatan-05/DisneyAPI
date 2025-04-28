@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const Peliculas = () => {
   const [movies, setMovies] = useState([]);
+  const [busqueda, setBusqueda] = useState('');
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -37,14 +38,29 @@ const Peliculas = () => {
     "Frozen II"
   ];
 
+  // Filtrar películas según la búsqueda
+  const peliculasFiltradas = peliculasDeseadas.filter(pelicula =>
+    pelicula.toLowerCase().includes(busqueda.toLowerCase())
+  );
+
   return (
     <div>
       <h2>Listado de Películas</h2>
-      <ul>
-        {peliculasDeseadas.map((pelicula, index) => (
-          <li key={index}>{pelicula}</li>
-        ))}
-      </ul>
+      <input 
+        type="text" 
+        placeholder="Buscar película..." 
+        value={busqueda} 
+        onChange={(e) => setBusqueda(e.target.value)} 
+      />
+      {peliculasFiltradas.length === 0 ? (
+        <p>No se encontraron películas.</p>
+      ) : (
+        <ul>
+          {peliculasFiltradas.map((pelicula, index) => (
+            <li key={index}>{pelicula}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

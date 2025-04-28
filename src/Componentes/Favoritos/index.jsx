@@ -1,4 +1,3 @@
-// Favoritos.js
 import { useState, useEffect } from 'react';
 import './style.css';
 
@@ -12,6 +11,12 @@ function Favoritos() {
     }
   }, []);
 
+  const quitarFavorito = (nombre) => {
+    const nuevosFavoritos = favoritos.filter(personaje => personaje.name !== nombre);
+    setFavoritos(nuevosFavoritos);
+    localStorage.setItem('favoritos', JSON.stringify(nuevosFavoritos));
+  };
+
   return (
     <div className="favoritos-lista">
       <h1>Favoritos</h1>
@@ -23,6 +28,7 @@ function Favoritos() {
             <li key={index}>
               <img src={personaje.image} alt={personaje.name} style={{ width: '100px', height: 'auto' }} />
               <span>{personaje.name}</span>
+              <button onClick={() => quitarFavorito(personaje.name)}>Quitar de favoritos</button>
             </li>
           ))}
         </ul>
